@@ -10,11 +10,13 @@ const port = process.env.PORT || 5002;
 
 app.use(express.json());
 
-app.use(cors({ 
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use("/uploads", express.static("public/uploads"));
 
@@ -23,4 +25,10 @@ app.use("/api", pdfRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
+});
+
+// on running localhost:5001
+
+app.get("/", (req, res) => {
+  res.send(`Server running on port ${port}`);
 });
